@@ -1,11 +1,11 @@
 import { IBook } from '@/types/books.type';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { BiStar } from 'react-icons/bi';
 
-
 const BookCard = ({ book }: { book: IBook }) => {
-  const { bookName, author, image, rating, category, tags } = book;
+  const { bookId, bookName, author, image, rating, category, tags } = book;
 
   return (
     <div className="w-full max-w-72.5 rounded-xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
@@ -16,13 +16,13 @@ const BookCard = ({ book }: { book: IBook }) => {
           alt={bookName}
           width={130}
           height={150}
-          className="h-40   w-auto object-contain transition-transform duration-300 hover:scale-105"
+          className="h-40 w-auto object-contain transition-transform duration-300 hover:scale-105"
         />
       </div>
 
       {/* Tags */}
       <div className="mt-4 flex flex-wrap gap-2">
-        {tags?.map((tag) => (
+        {tags?.map(tag => (
           <span
             key={tag}
             className="rounded-full bg-[#F0FDF4] px-3 py-1 text-xs font-medium text-green-600"
@@ -57,6 +57,14 @@ const BookCard = ({ book }: { book: IBook }) => {
           <BiStar size={17} strokeWidth={1.5} className="text-gray-500" />
         </div>
       </div>
+
+      {/* View Details Button */}
+      <Link
+        href={`/books/${bookId}`}
+        className="mt-4 block w-full rounded-lg bg-green-600 py-2.5 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-green-700"
+      >
+        View Details
+      </Link>
     </div>
   );
 };
